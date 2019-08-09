@@ -1,6 +1,7 @@
 
 module.exports = {
-  mode: 'universal',
+  mode: 'universal',//同构应用程序（服务器端呈现+客户端导航）
+  // mode: 'spa',//没有服务器端呈现（仅客户端导航）
   /*
   ** Headers of the page
   */

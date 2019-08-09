@@ -14,19 +14,45 @@ export default {
     name: "文章列表"
     // dataList:[]
   }),
-  asyncData({ app }) {
-    // //并发请求 async
-    // let [listA, listB] = await  app.$axios.all([
-    //           app.$axios.get("api/zllublogAdmin/article/get.article.php"),
-    //           app.$axios.get("api/zllublogAdmin/article/get.article.php")
-    //      ])
-    //      console.log("listA",listA)
-    //      console.log("listB",listB)
-    //    return {
-    //     listA:listA,
-    //     listB:listB
-    //    }
-    return app.$axios
+
+  // //同步请求
+  // async asyncData({ app }) {
+
+  //   let dataA = await app.$axios
+  //     .get("api/zllublogAdmin/article/get.article.php")
+  //     .then(res => {
+  //       return res.data.list;
+  //     });
+  //   console.log(dataA);
+  //   console.log(dataB);
+
+  //   let dataB = await app.$axios
+  //     .get("api/zllublogAdmin/article/get.article.php")
+  //     .then(res => {
+  //       return res.data.list;
+  //     });
+  //   console.log(dataA);
+  //   console.log(dataB);
+
+  //   return { dataList: dataA };
+
+  // },
+
+
+  // //异步步请求
+  // async asyncData({ app }) {
+  //   let [dataA, dataB] = await Promise.all([
+  //     app.$axios.get("api/zllublogAdmin/article/get.article.php"),
+  //     app.$axios.get("api/zllublogAdmin/article/get.article.php")
+  //   ]);
+  //   console.log(dataA);
+  //   console.log(dataB);
+  //     return { dataList: dataA };
+  // },
+
+  //单个请求
+   asyncData({ app }) {
+     return app.$axios
       .get("api/zllublogAdmin/article/get.article.php")
       .then(res => {
         return { dataList: res.data.list };
