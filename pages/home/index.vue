@@ -62,10 +62,6 @@ export default {
     this.$nextTick(() => {
       this.$nuxt.$loading.start();
       setTimeout(() => this.$nuxt.$loading.finish(), 500);
-      // console.log(this.$store);
-      // console.log(this.name);
-      //   console.log(this.$axios);
-
       this.open(true);
     });
   },

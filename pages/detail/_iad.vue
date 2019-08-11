@@ -9,8 +9,6 @@
 
 <script>
 export default {
-  // middleware: 'auth'
-
   async asyncData({ isStatic, params, payload }) {
       return await {
         user: params.iad,

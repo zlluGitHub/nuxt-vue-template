@@ -32,13 +32,17 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src:  '@/plugins/iview' }, 
+    { src: '@/plugins/iview' },
 
     // { src: '~/plugins/vue-notifications', ssr: false },
 
     // { src: '~/plugins/client-only.js', mode: 'client' },
     // { src: '~/plugins/server-only.js', mode: 'server' }
   ],
+  env: {
+    // baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    baseUrl: process.env.NODE_ENV==='production'?'http://localhost:3000':'/api'
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -47,9 +51,6 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  // env: {
-  //   baseUrl: process.env.BASE_URL || 'http://localhost:3000'
-  // },
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
@@ -58,7 +59,7 @@ module.exports = {
     // prefix: '/api/',
     proxy: true // Can be also an object with default options
   },
-  proxy: {
+  proxy: {//只适合在开发环境下解决跨域问题
     '/api/': {
       target: 'https://zhenglinglu.cn',
       pathRewrite: { '^/api/': '/' },
@@ -78,12 +79,15 @@ module.exports = {
     }
   },
   // router: {
-  //   // base: './',
+    // base: 'dist/',
   //   middleware: 'auth'//每个路由改变时被调用
   // },
   generate: {
     subFolders: true,//true 时为每个路由创建一个目录并生成index.html文件
     // interval: 500,
+    // 动态路由生成静态文件
+
+    // 方法一
     // routes: function (callback) {
     //   axios.get('https://zhenglinglu.cn/zllublogAdmin/article/get.article.php')
     //     .then((res) => {
@@ -94,27 +98,29 @@ module.exports = {
     //     })
     //     .catch(callback)
     // }
-    async routes(){
+
+    //方法二
+    async routes() {
       let data1 = await axios.get('http://localhost:9096/zllublogAdmin/article/get.article.php')
-      .then((res) => {
-        return res.data.list.map((user) => {
-          return {
-            route: '/detail/' + user.bid,
-            payload: user
-          }
+        .then((res) => {
+          return res.data.list.map((user) => {
+            return {
+              route: '/detail/' + user.bid,
+              payload: user
+            }
+          })
         })
-      })
-      
+
       let data2 = await axios.get('http://localhost:9096/zllublogAdmin/article/get.article.php')
-      .then((res) => {
-        return res.data.list.map((user) => {
-          return {
-            route: '/detail/' + user.id,
-            payload: user
-          }
+        .then((res) => {
+          return res.data.list.map((user) => {
+            return {
+              route: '/detail/' + user.id,
+              payload: user
+            }
+          })
         })
-      })
-      return [...data1,...data2]
+      return [...data1, ...data2]
     }
   }
 }
