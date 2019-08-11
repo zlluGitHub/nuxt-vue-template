@@ -2,7 +2,7 @@
   <div>
     <h1>{{name}}</h1>
     <ul>
-      <li v-for="item of dataList" :key="item.title">{{item.title}}</li>
+      <!-- <li v-for="item of dataList" :key="item.title">{{item.title}}</li> -->
     </ul>
   </div>
 </template>
@@ -51,19 +51,19 @@ export default {
   // },
 
   //单个请求
-   asyncData({ app }) {
-     return app.$axios
-      .get("api/zllublogAdmin/article/get.article.php")
-      .then(res => {
-        return { dataList: res.data.list };
-      });
-  },
+  //  asyncData({ app }) {
+  //    return app.$axios
+  //     .get("api/zllublogAdmin/article/get.article.php")
+  //     .then(res => {
+  //       return { dataList: res.data.list };
+  //     });
+  // },
   mounted() {
     this.$nextTick(() => {
       this.$nuxt.$loading.start();
       setTimeout(() => this.$nuxt.$loading.finish(), 500);
-      console.log(this.$store);
-      console.log(this.name);
+      // console.log(this.$store);
+      // console.log(this.name);
       //   console.log(this.$axios);
 
       this.open(true);

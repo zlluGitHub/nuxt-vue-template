@@ -2,8 +2,8 @@
   <div>
     <nuxt-link to="/">首页</nuxt-link>
     <nuxt-link to="/home">页面1</nuxt-link>
+    <a href="http://localhost:9096/goods">商品列表</a>
     <nuxt-link to="/orders">页面2</nuxt-link>
-    <nuxt-link to="/goods_list">商品列表（动态路由传参）</nuxt-link>
     <nuxt-link to="/users">用户</nuxt-link>
     <nuxt />
   </div>
