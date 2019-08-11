@@ -40,8 +40,7 @@ module.exports = {
     // { src: '~/plugins/server-only.js', mode: 'server' }
   ],
   env: {
-    // baseUrl: process.env.BASE_URL || 'http://localhost:3000'
-    baseUrl: process.env.NODE_ENV==='production'?'http://localhost:3000':'/api'
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
   /*
   ** Nuxt.js dev-modules
@@ -101,7 +100,7 @@ module.exports = {
 
     //方法二
     async routes() {
-      let data1 = await axios.get('http://localhost:9096/zllublogAdmin/article/get.article.php')
+      let data1 = await axios.get(process.env.BASE_URL+'/zllublogAdmin/article/get.article.php')
         .then((res) => {
           return res.data.list.map((user) => {
             return {
@@ -111,7 +110,7 @@ module.exports = {
           })
         })
 
-      let data2 = await axios.get('http://localhost:9096/zllublogAdmin/article/get.article.php')
+      let data2 = await axios.get(process.env.BASE_URL+'/zllublogAdmin/article/get.article.php')
         .then((res) => {
           return res.data.list.map((user) => {
             return {
