@@ -9,6 +9,23 @@
     <nuxt />
   </div>
 </template>
+<script>
+export default {
+  name: "default",
+  components: {
+   
+  },
+  data: () => ({
+    show: false
+  }),
+  created() {
+     this.$axios.get(process.env.baseUrl + "/adminblog/article/get.article.php").then(res => {
+        // this.$store.commit("setArtileAll", res.data.list);
+      });
+  }
+
+};
+</script>
 
 <style lang="scss" scoped>
 div{
